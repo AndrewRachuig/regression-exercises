@@ -31,7 +31,7 @@ def get_zillow():
         '''
         url = env.get_db_url('zillow')
         df = pd.read_sql(query, url)
-        df.to_csv(filename)
+        df.to_csv(filename, index = False)
 
         return df  
 
