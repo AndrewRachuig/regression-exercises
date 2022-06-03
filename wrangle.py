@@ -96,6 +96,16 @@ def clean_sqr_feet(df):
     # change 'sqr_ft' to whichever name you have for sqr_ft in df
     return df[df.calculatedfinishedsquarefeet >= min_sqr_ft]
 
+def map_counties(df):
+    # identified counties for fips codes 
+    counties = {6037: 'los_angeles',
+                6059: 'orange',
+                6111: 'ventura'}
+    # map counties to fips codes
+    df.fips = df.fips.map(counties)
+    df.rename(columns=({ 'fips': 'county'}), inplace=True)
+    return df
+
 def wrangle_zillow(df):
     '''
     This function takes in an uncleaned zillow dataframe and peforms various cleaning functions. It returns a cleaned zillow dataframe.
@@ -122,6 +132,9 @@ def wrangle_zillow(df):
 
     # Getting rid of nonsense entries where the house has a sq footage value smaller than a theoretical minimum
     df = clean_sqr_feet(df)
+
+    # Changing the fips column in the dataframe to show actual counties represented by fips number
+    df = map_counties(df)
 
     return df
     
