@@ -16,9 +16,8 @@ Arguments:  x - the feature variable with which the linear regression model was 
             y - the target variable's actual datapoints
             yhat - the predicted datapoints for the target variable by the linear regression model
 '''
-
-    residual = yhat - y
-    baseline_residual = y.mean() - y
+    residual = y - yhat
+    baseline_residual = y - y.mean()
 
     plt.figure(figsize = (11,5))
 
