@@ -32,12 +32,23 @@ def data_scaler(train, validate, test, columns_to_scale):
     scaler = MinMaxScaler()
     
     train_scaled[columns_to_scale] = pd.DataFrame(scaler.fit_transform(train[columns_to_scale]), 
-                                                  columns=train[columns_to_scale].columns.values).set_index([train.index.values])
+                                                  columns=train[columns_to_scale].columns.values).set_index([train.index])
 
     validate_scaled[columns_to_scale] = pd.DataFrame(scaler.transform(validate[columns_to_scale]),
-                                                  columns=validate[columns_to_scale].columns.values).set_index([validate.index.values])
+                                                  columns=validate[columns_to_scale].columns.values).set_index([validate.index])
     
     test_scaled[columns_to_scale] = pd.DataFrame(scaler.transform(test[columns_to_scale]),
-                                                 columns=test[columns_to_scale].columns.values).set_index([test.index.values])
+                                                 columns=test[columns_to_scale].columns.values).set_index([test.index])
+
+    #Try the following if the previous doesn't work.
+
+    # train_scaled[columns_to_scale] = pd.DataFrame(scaler.fit_transform(train[columns_to_scale]), 
+    #                                               columns=train[columns_to_scale].columns.values).set_index([train.index.values])
+
+    # validate_scaled[columns_to_scale] = pd.DataFrame(scaler.transform(validate[columns_to_scale]),
+    #                                               columns=validate[columns_to_scale].columns.values).set_index([validate.index.values])
+    
+    # test_scaled[columns_to_scale] = pd.DataFrame(scaler.transform(test[columns_to_scale]),
+    #                                              columns=test[columns_to_scale].columns.values).set_index([test.index.values])
 
     return train_scaled, validate_scaled, test_scaled
